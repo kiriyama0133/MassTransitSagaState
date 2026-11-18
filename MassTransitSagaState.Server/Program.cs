@@ -1,5 +1,5 @@
 
-using YourApp.Infrastructure;
+using MassTransitSagaState.Server.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 

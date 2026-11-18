@@ -3,6 +3,8 @@ using Microsoft.Extensions.Hosting.Contracts;
 using Microsoft.Extensions.Hosting.Domain.Entities;
 using Microsoft.Extensions.Hosting.Infrastructure.Persistence;
 
+namespace MassTransitSagaState.Server.Handler;
+
 public class CreateProductHandler(AppDbContext dbContext) 
     : IConsumer<CreateProduct>
 {

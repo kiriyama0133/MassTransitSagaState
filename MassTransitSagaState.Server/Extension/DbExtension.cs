@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.Infrastructure.Persistence;
 using Npgsql;
 
-namespace YourApp.Infrastructure;
+namespace MassTransitSagaState.Server.Extension;
 
 public static class DbExtension
 {
