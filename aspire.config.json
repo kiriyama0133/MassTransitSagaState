@@ -1,0 +1,5 @@
+{
+  "appHost": {
+    "path": "MassTransitSagaState.AppHost/MassTransitSagaState.AppHost.csproj"
+  }
+}
