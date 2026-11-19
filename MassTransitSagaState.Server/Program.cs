@@ -1,8 +1,14 @@
 
+using MassTransitSagaState.Server.Application.Interfaces;
 using MassTransitSagaState.Server.Extension;
+using MassTransitSagaState.Server.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
-
+// services
+builder.Services.AddServices();
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
 builder.AddRedisClientBuilder("cache")
@@ -16,14 +22,23 @@ builder.Services.AddOpenApi();
 
 // pg
 builder.Services.AddAppDatabase(builder.Configuration);
+// masstransit
+builder.Services.AddMassTransitService(builder.Configuration);
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+}
+
+// migration
+using (var scope = app.Services.CreateScope())
+{
+    var dbContet = scope.ServiceProvider
+        .GetRequiredService<AppDbContext>();
+    await dbContet.Database.MigrateAsync();
 }
 
 app.UseOutputCache();
@@ -46,6 +61,11 @@ api.MapGet("weatherforecast", () =>
 .CacheOutput(p => p.Expire(TimeSpan.FromSeconds(5)))
 .WithName("GetWeatherForecast");
 
+api.MapGet("product", async ([FromServices] ICreateProduct productService) =>
+{
+    await productService.CreateProductAsync("kiriyama", "hello kiriyama!");
+    return Results.Ok();
+});
 app.MapDefaultEndpoints();
 
 app.UseFileServer();

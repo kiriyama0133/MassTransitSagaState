@@ -1,14 +1,15 @@
 using MassTransit;
+using MassTransit.Mediator;
 using Microsoft.Extensions.Hosting.Contracts;
 using Microsoft.Extensions.Hosting.Domain.Entities;
 using Microsoft.Extensions.Hosting.Infrastructure.Persistence;
 
 namespace MassTransitSagaState.Server.Handler;
 
-public class CreateProductHandler(AppDbContext dbContext) 
-    : IConsumer<CreateProduct>
+public class CreateProductHandler(IScopedMediator mediator) 
+    : IConsumer<CreateProductEvent>
 {
-    public async Task Consume(ConsumeContext<CreateProduct> context)
+    public async Task Consume(ConsumeContext<CreateProductEvent> context)
     {
         var product = new ProductEntity
         {
@@ -17,13 +18,10 @@ public class CreateProductHandler(AppDbContext dbContext)
             Description =  context.Message.Description,
         };
 
-        dbContext.Products.Add(product);
-        await dbContext.SaveChangesAsync();
-        
-        await context.Publish(new ProductCreated(
+        await mediator.Publish(new ProductCreated(
             product.Id,
             product.Name,
-            "kiriyama",
+            product.Description,
             DateTime.UtcNow
         ));
     }

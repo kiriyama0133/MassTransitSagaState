@@ -11,11 +11,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MassTransitSagaState.Server\MassTransitSagaState.Server.csproj" />
+    <ProjectReference Include="..\Worker\Worker.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.5.3" />
     <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="17.0.0" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="17.0.0" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="13.5.3" />
   </ItemGroup>
 </Project>

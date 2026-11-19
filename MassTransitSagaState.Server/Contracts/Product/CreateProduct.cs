@@ -1,6 +1,6 @@
 namespace Microsoft.Extensions.Hosting.Contracts;
 
-public record CreateProduct(
+public record CreateProductEvent(
     string Name,
     string Description
 );
