@@ -22,38 +22,6 @@ namespace MassTransitSagaState.Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MassTransitSagaState.Server.Sagas.NewsletterEmailSagaData", b =>
-                {
-                    b.Property<Guid>("CorrelationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CurrentState")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<bool>("NotifyProductSend")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("CorrelationId");
-
-                    b.ToTable("NewsletterEmailSagaData");
-                });
-
             modelBuilder.Entity("Microsoft.Extensions.Hosting.Domain.Entities.ProductEntity", b =>
                 {
                     b.Property<Guid>("Id")

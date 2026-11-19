@@ -1,4 +1,4 @@
-namespace MassTransitSagaState.Server.Application.Interface;
+namespace MassTransitSagaState.EmailPage.Worker.Services;
 
 public interface IEmailServer
 {

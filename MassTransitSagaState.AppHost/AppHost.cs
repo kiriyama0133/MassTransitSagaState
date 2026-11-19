@@ -24,6 +24,9 @@ server.PublishWithContainerFiles(webfrontend, "wwwroot");
 
 builder.AddProject<Projects.Worker>("worker")
     .WithReference(rabbitmq)
-    .WaitFor(rabbitmq);
+    .WaitFor(rabbitmq)
+    // saga 状态表放在 appdb 里，Worker 需要自己的 DbContext 连接
+    .WithReference(appDb)
+    .WaitFor(appDb);
 
 builder.Build().Run();

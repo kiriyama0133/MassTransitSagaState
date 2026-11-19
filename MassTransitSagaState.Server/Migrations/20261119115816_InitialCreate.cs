@@ -11,22 +11,8 @@ namespace MassTransitSagaState.Server.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "NewsletterEmailSagaData",
-                columns: table => new
-                {
-                    CorrelationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CurrentState = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    Description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
-                    NotifyProductSend = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NewsletterEmailSagaData", x => x.CorrelationId);
-                });
-
+            // saga 表（NewsletterEmailSagaDatas）已移交给 MassTransitSaga.Sagas 的 SagaDbContext，
+            // 由它的 InitialSagaState 迁移创建，这里不再建表，避免两个迁移链抢同一张表。
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -44,9 +30,6 @@ namespace MassTransitSagaState.Server.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "NewsletterEmailSagaData");
-
             migrationBuilder.DropTable(
                 name: "Products");
         }

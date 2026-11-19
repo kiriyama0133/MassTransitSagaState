@@ -18,6 +18,7 @@ public class AppDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
+        
     }
     
     public DbSet<ProductEntity> Products => Set<ProductEntity>();

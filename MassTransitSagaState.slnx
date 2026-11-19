@@ -3,6 +3,8 @@
     <Build />
     <Deploy />
   </Project>
+  <Project Path="MassTransitSaga.Contracts/MassTransitSaga.Contracts.csproj" />
+  <Project Path="MassTransitSaga.Sagas/MassTransitSaga.Sagas.csproj" />
   <Project Path="MassTransitSagaState.AppHost/MassTransitSagaState.AppHost.csproj" />
   <Project Path="MassTransitSagaState.Server/MassTransitSagaState.Server.csproj" />
   <Project Path="Worker/Worker.csproj" />

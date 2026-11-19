@@ -1,9 +1,8 @@
 using MassTransit;
-using MassTransit.Futures.Contracts;
 
-namespace MassTransitSagaState.Server.Sagas;
+namespace MassTransitSaga.Sagas;
 
-public class NewsletterEmailSagaData : SagaStateMachineInstance 
+public class NewsletterEmailSagaData : SagaStateMachineInstance
 {
     public Guid CorrelationId { get; set; }
     public string CurrentState { get; set; } = string.Empty;

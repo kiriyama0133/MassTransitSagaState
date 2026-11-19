@@ -9,8 +9,15 @@ public class AppDbContextFactory
 {
     public AppDbContext CreateDbContext(string[] args)
     {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings.Development.json", true)
+            .Build();
+        
         var connectionString =
-            Environment.GetEnvironmentVariable("ConnectionStrings__appdb");
+            Environment.GetEnvironmentVariable("ConnectionStrings__appdb") 
+                ?? configuration.GetConnectionString("appdb");
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
